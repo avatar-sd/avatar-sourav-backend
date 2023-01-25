@@ -9,7 +9,8 @@ const config = {
   dev: {
     port: 443,
     nPort: 80,
-    mongoUri: "mongodb://localhost:27017/avatar",
+    // mongoUri: "mongodb://localhost:27017/avatar",
+    mongoUri: `mongodb://test:test@ac-l7bwl9g-shard-00-00.weurt76.mongodb.net:27017,ac-l7bwl9g-shard-00-01.weurt76.mongodb.net:27017,ac-l7bwl9g-shard-00-02.weurt76.mongodb.net:27017/?ssl=true&replicaSet=atlas-7fd56v-shard-0&authSource=admin&retryWrites=true&w=majority`,
     gmailId: "",
     gmailPassword: "",
     optTime: 60 * 15,
