@@ -18,13 +18,18 @@ router.get("/all_user", (req, res) => {
   controllerObj.controller(req, res, action);
 });
 
-router.get("/details_update", auth, (req, res) => {
+router.patch("/details_update", auth, (req, res) => {
   const action = "details_update";
   controllerObj.controller(req, res, action);
 });
 
-router.get("/avatar_add", auth, (req, res) => {
+router.post("/avatar_add", auth, (req, res) => {
   const action = "avatar_add";
+  controllerObj.controller(req, res, action);
+});
+
+router.patch("/avatar_edit", auth, (req, res) => {
+  const action = "avatar_edit";
   controllerObj.controller(req, res, action);
 });
 

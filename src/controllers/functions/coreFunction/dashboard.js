@@ -77,10 +77,14 @@ exports.avatarAdd = (req, res) => {
   try {
     DataModulePopulate(AvatarInfo.findOne({ user: req.user._id }))
       .then((data) => {
-        var varData = [];
+        var varData = new AvatarInfo();
         varData.createdBy = req.user._id;
         for (const [key, value] of Object.entries(req.body)) {
-          if (["avatarPath", "previewPath", "isPublic", "name"].includes(key)) {
+          if (
+            ["avatarPath", "previewPath", "isPublic", "name", "type"].includes(
+              key
+            )
+          ) {
             varData[key] = value;
           }
         }
@@ -101,24 +105,25 @@ exports.avatarAdd = (req, res) => {
 
 exports.avatarEdit = (req, res) => {
   try {
-    DataModulePopulate(
-      AvatarInfo.findOne({ user: req.user._id }).populate({
-        path: "user",
-      })
-    )
+    DataModulePopulate(AvatarInfo.findOne({ _id: req.body.id }))
       .then((data) => {
         if (data === null) {
           return res.status(400).send(errorMsg(520));
         } else {
-          var varData = [];
           for (const [key, value] of Object.entries(req.body)) {
             if (
-              ["avatarPath", "previewPath", "isPublic", "name"].includes(key)
+              [
+                "avatarPath",
+                "previewPath",
+                "isPublic",
+                "name",
+                "type",
+              ].includes(key)
             ) {
-              varData[key] = value;
+              data[key] = value;
             }
           }
-          varData.save((error) => {
+          data.save((error) => {
             if (error) {
               return res.status(500).send(errorMsg(error));
             }
@@ -135,12 +140,16 @@ exports.avatarEdit = (req, res) => {
 };
 
 exports.fetchAvatar = (req, res) => {
-  var varData = req.user._id;
+  var varData = [{ createdBy: req.user._id }];
   if (req.query.id) {
-    varData = req.query.id;
+    varData = [{ createdBy: req.query.id }];
   }
+  if (req.query.type) {
+    varData.push({ type: req.query.type });
+  }
+
   try {
-    DataModulePopulate(AvatarInfo.find({ createdBy: varData }))
+    DataModulePopulate(AvatarInfo.find({ $and: varData }))
       .then((data) => {
         if (data === null) {
           return res.status(400).send(errorMsg(520));

@@ -12,7 +12,7 @@ const errorCode = {
   511: "email / UserId doesn't exist!",
   512: "please enter correct password",
   513: "Please enter any one data",
-  514: "Please enter the secrect key",
+  514: "Please enter the password",
   515: "User type is required",
   516: "Refresh token is required",
   517: "Internal server error",

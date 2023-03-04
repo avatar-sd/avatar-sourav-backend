@@ -75,4 +75,8 @@ module.exports = {
     controller: "dashboard_auth",
     function: "avatarAdd",
   },
+  avatar_edit: {
+    controller: "dashboard_auth",
+    function: "avatarEdit",
+  },
 };

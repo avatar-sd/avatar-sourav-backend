@@ -15,6 +15,9 @@ const avatarInfoSchema = new Schema(
     previewPath: {
       type: String,
     },
+    type: {
+      type: String,
+    },
     isPublic: {
       type: Boolean,
       default: false,

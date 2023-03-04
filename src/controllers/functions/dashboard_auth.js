@@ -8,6 +8,7 @@ const {
   fetchAvatar,
   detailsUpdate,
   avatarAdd,
+  avatarEdit
 } = require("./coreFunction/dashboard");
 const { IsPresent, errorMsg } = require("../../utils");
 
@@ -29,4 +30,8 @@ exports.detailsUpdate = function (req, res) {
 
 exports.avatarAdd = function (req, res) {
   avatarAdd(req, res);
+};
+
+exports.avatarEdit = function (req, res) {
+  avatarEdit(req, res);
 };
